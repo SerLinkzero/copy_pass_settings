@@ -19,7 +19,7 @@ bl_info = {
     "location": "View Layer Properties",
     "warning": "",
     "category": "Render",
-    "wiki_url": ""
+    "wiki_url": "https://github.com/SerLinkzero/copy_pass_settings"
 }
 
 import bpy
