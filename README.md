@@ -1,6 +1,6 @@
 # Copy Pass Settings
 
-This simple addon copies the render pass settings of the current view layer to any selected ones in the file.
+This simple Blender addon copies the render pass settings of the current view layer to any selected ones in the file.
 
 A new panel named `Copy Pass Settings` is added to the View Layer Properties. The UI should be quite self-explanatory.
 
