@@ -7,13 +7,16 @@ from bpy.props import (
 )
 
 # View Layers
+
+
 class CPSDataLayer(bpy.types.PropertyGroup):
-    selected: BoolProperty(default = True)
+    selected: BoolProperty(default=True)
     scene_name: StringProperty()
     layer_name: StringProperty()
-    
+
     # For list filtering
     name: StringProperty()
+
 
 class CPSData(bpy.types.PropertyGroup):
     view_layers: CollectionProperty(
@@ -23,7 +26,8 @@ class CPSData(bpy.types.PropertyGroup):
 
     view_layer_idx: IntProperty()
 
+
 classes = (
     CPSDataLayer,
     CPSData
-    )
+)

@@ -1,6 +1,7 @@
 import bpy
 from . import data
 
+
 class CPS_UL_copy_pass_settings(bpy.types.UIList):
     def draw_item(self, context, layout, data, item: data.CPSDataLayer, icon, active_data, active_propname, index):
         # Each item is a view layer
@@ -8,8 +9,9 @@ class CPS_UL_copy_pass_settings(bpy.types.UIList):
             display_name = item.name + " [CURRENT]"
         else:
             display_name = item.name
-        layout.label(text = display_name, icon_value = icon)
-        layout.prop(data = item, property = "selected", text = "")
+        layout.label(text=display_name, icon_value=icon)
+        layout.prop(data=item, property="selected", text="")
+
 
 class CPS_PT_copy_pass_settings(bpy.types.Panel):
     bl_label = "Copy Render Pass Settings"
@@ -21,10 +23,15 @@ class CPS_PT_copy_pass_settings(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
         cps_data: data.CPSData = context.scene.copy_pass_settings
-        
-        layout.operator(operator = "scene.update_view_layer_list", text = "Update View Layer List")
 
-        layout.operator(operator = "scene.copy_pass_settings", text = "Copy Pass Settings")
-        layout.template_list("CPS_UL_copy_pass_settings", "layers", cps_data, "view_layers", cps_data, "view_layer_idx", rows = 6)
+        layout.operator(operator="scene.update_view_layer_list",
+                        text="Update View Layer List")
+
+        layout.operator(operator="scene.copy_pass_settings",
+                        text="Copy Pass Settings")
+
+        layout.template_list("CPS_UL_copy_pass_settings", "layers",
+                             cps_data, "view_layers", cps_data, "view_layer_idx", rows=6)
+
 
 classes = (CPS_UL_copy_pass_settings, CPS_PT_copy_pass_settings, )

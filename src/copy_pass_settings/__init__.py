@@ -10,6 +10,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+from . import (panel, operator, data)
+from bpy.props import (
+    PointerProperty,
+)
+import bpy
 bl_info = {
     "name": "Copy Pass Settings",
     "author": "Linkzero Tsang <github.com/serlinkzero>",
@@ -22,13 +27,6 @@ bl_info = {
     "wiki_url": "https://github.com/SerLinkzero/copy_pass_settings"
 }
 
-import bpy
-from bpy.props import (
-    PointerProperty,
-    )
-
-from . import (panel, operator, data)
-
 
 classes = panel.classes + operator.classes + data.classes
 
@@ -38,13 +36,12 @@ def register():
         bpy.utils.register_class(cls)
 
     # Register the main property group
-    bpy.types.Scene.copy_pass_settings = PointerProperty(type = data.CPSData)
+    bpy.types.Scene.copy_pass_settings = PointerProperty(type=data.CPSData)
 
 
 def unregister():
     for cls in classes:
         bpy.utils.unregister_class(cls)
-
 
 
 if __name__ == "__main__":

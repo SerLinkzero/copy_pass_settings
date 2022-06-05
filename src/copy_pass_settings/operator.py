@@ -1,6 +1,6 @@
 import bpy
-from .data import (CPSData, CPSDataLayer)
-from datetime import datetime
+from .data import (CPSData, )
+
 
 def update_layers():
 
@@ -16,14 +16,16 @@ def update_layers():
     # A record of the currently existing layers in the collection prop
     existing_layer_ids = []
     for layer in cps_data.view_layers:
-        existing_layer_ids.append({"scene_name": layer.scene_name, "layer_name": layer.layer_name})
+        existing_layer_ids.append(
+            {"scene_name": layer.scene_name, "layer_name": layer.layer_name})
 
     # Add all currently existing view layers to a list
     # Should be the latest state everytime this function executes
     current_layer_ids = []
     for scene in bpy.data.scenes:
         for layer in scene.view_layers:
-            current_layer_ids.append({"scene_name": scene.name, "layer_name": layer.name})
+            current_layer_ids.append(
+                {"scene_name": scene.name, "layer_name": layer.name})
 
     # Add new layers to data
     for layer in current_layer_ids:
@@ -32,7 +34,7 @@ def update_layers():
             new_layer.scene_name = layer["scene_name"]
             new_layer.layer_name = layer["layer_name"]
             new_layer.name = layer["scene_name"] + " / " + layer["layer_name"]
-    
+
     # Remove the non-existing layers
     idx_offset = 0
     for i, layer in enumerate(existing_layer_ids):
@@ -47,8 +49,10 @@ def copy_pass_settings(context, selected_layers, source_layer):
     from .settings import (passes_common, passes_eevee, apply_settings)
 
     for target_layer in selected_layers:
-        apply_settings(source = source_layer, target = target_layer, props = passes_common)
-        apply_settings(source = source_layer.eevee, target = target_layer.eevee, props = passes_eevee)
+        apply_settings(source=source_layer,
+                       target=target_layer, props=passes_common)
+        apply_settings(source=source_layer.eevee,
+                       target=target_layer.eevee, props=passes_eevee)
 
 
 class CPS_OT_CopyPassSettings(bpy.types.Operator):
@@ -59,19 +63,22 @@ class CPS_OT_CopyPassSettings(bpy.types.Operator):
     @classmethod
     def poll(cls, context):
         return context.scene is not None
-    
+
     def execute(self, context):
         cps_data: CPSData = context.scene.copy_pass_settings
         current_layer = context.view_layer
         selected_layers = []
+
         for layer in cps_data.view_layers:
             if layer.selected:
                 view_layer = bpy.data.scenes[layer.scene_name].view_layers[layer.layer_name]
                 selected_layers.append(view_layer)
 
-        copy_pass_settings(context, selected_layers = selected_layers, source_layer = current_layer)
+        copy_pass_settings(
+            context, selected_layers=selected_layers, source_layer=current_layer)
 
         return {'FINISHED'}
+
 
 class CPS_OT_UpdateViewLayerList(bpy.types.Operator):
     bl_idname = "scene.update_view_layer_list"
@@ -84,7 +91,7 @@ class CPS_OT_UpdateViewLayerList(bpy.types.Operator):
     def execute(self, context):
         update_layers()
         return {'FINISHED'}
-    
+
 
 classes = (
     CPS_OT_CopyPassSettings,

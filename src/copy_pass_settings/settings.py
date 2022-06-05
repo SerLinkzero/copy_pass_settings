@@ -35,6 +35,7 @@ passes_eevee = (
     "use_pass_volume_direct",
 )
 
+
 def apply_settings(source, target, props):
     for prop in props:
         setattr(target, prop, getattr(source, prop))
