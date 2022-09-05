@@ -54,6 +54,20 @@ def copy_pass_settings(context, selected_layers, source_layer):
         apply_settings(source=source_layer.eevee,
                        target=target_layer.eevee, props=passes_eevee)
 
+    # Adding AOVs
+    aovs = source_layer.aovs
+    for target_layer in selected_layers:
+        for aov in aovs:
+            added_aov = target_layer.aovs.add()
+            added_aov.name = aov.name
+    
+    # Adding light groups
+    lightgroups = source_layer.lightgroups
+    for target_layer in selected_layers:
+        for lightgroup in lightgroups:
+            target_layer.lightgroups.add(lightgroup.name)
+
+
 
 class CPS_OT_CopyPassSettings(bpy.types.Operator):
     bl_idname = "scene.copy_pass_settings"
