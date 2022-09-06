@@ -35,7 +35,24 @@ passes_eevee = (
     "use_pass_volume_direct",
 )
 
-
 def apply_settings(source, target, props):
     for prop in props:
         setattr(target, prop, getattr(source, prop))
+
+def copy_aovs(source, target):
+    for aov in source.aovs:
+        if aov.name in target.aovs.keys():
+            if target.aovs[aov.name].type == aov.type:
+                continue
+            target.aovs[aov.name].type = aov.type
+        else:
+            new_aov = target.aovs.add()
+            new_aov.name = aov.name
+            new_aov.type = aov.type
+
+def copy_lightgroups(source, target):
+    for lightgroup in source.lightgroups:
+        if lightgroup.name in target.lightgroups.keys():
+            continue
+        else:
+            target.lightgroups.add(name=lightgroup.name)

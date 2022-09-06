@@ -10,7 +10,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from . import (panel, operator, data)
+from copy_pass_settings import (panel, operator, data)
 from bpy.props import (
     PointerProperty,
 )
@@ -19,8 +19,8 @@ bl_info = {
     "name": "Copy Pass Settings",
     "author": "Linkzero Tsang <github.com/serlinkzero>",
     "description": "Copy view layer pass settings.",
-    "blender": (2, 80, 0),
-    "version": (0, 0, 1),
+    "blender": (3, 20, 0),
+    "version": (0, 0, 2),
     "location": "View Layer Properties",
     "warning": "",
     "category": "Render",

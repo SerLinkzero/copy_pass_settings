@@ -13,7 +13,7 @@ extras = [
     "./LICENSE"
 ]
 
-version = "0.0.1"
+version = "0.0.2"
 
 base_path = "./src"
 directory = "copy_pass_settings"

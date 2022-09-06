@@ -1,5 +1,5 @@
 import bpy
-from .data import (CPSData, )
+from copy_pass_settings.data import (CPSData, )
 
 
 def update_layers():
@@ -46,14 +46,15 @@ def update_layers():
 
 def copy_pass_settings(context, selected_layers, source_layer):
     # Local import
-    from .settings import (passes_common, passes_eevee, apply_settings)
+    from .settings import (passes_common, passes_eevee, apply_settings, copy_aovs, copy_lightgroups)
 
     for target_layer in selected_layers:
         apply_settings(source=source_layer,
                        target=target_layer, props=passes_common)
         apply_settings(source=source_layer.eevee,
                        target=target_layer.eevee, props=passes_eevee)
-
+        copy_aovs(source=source_layer, target=target_layer)
+        copy_lightgroups(source=source_layer, target=target_layer)
 
 class CPS_OT_CopyPassSettings(bpy.types.Operator):
     bl_idname = "scene.copy_pass_settings"
