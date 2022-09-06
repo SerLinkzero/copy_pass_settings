@@ -19,7 +19,7 @@ bl_info = {
     "name": "Copy Pass Settings",
     "author": "Linkzero Tsang <github.com/serlinkzero>",
     "description": "Copy view layer pass settings.",
-    "blender": (2, 80, 0),
+    "blender": (3, 20, 0),
     "version": (0, 0, 2),
     "location": "View Layer Properties",
     "warning": "",
